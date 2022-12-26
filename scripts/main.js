@@ -1,15 +1,26 @@
-const playBtn = document.querySelector('#playBtn');
-const maxAttempts = 3;
-const highestNumber = 10;
-const response = document.querySelector('#response');
-const guessInput = document.querySelector('#guess');
-let guess = '';
-let randomNumber = Math.floor(Math.random() * highestNumber) + 1;
-let currentAttempt = 0;
-let winFlag = false;
-let lossFlag = false;
+const maxAttempts = 3,
+    lowestNumber = 5,
+    highestNumber = 15;
+
+const response = document.querySelector('#response'),
+    guessInput = document.querySelector('#guess'),
+    playBtn = document.querySelector('#playBtn'),
+    lowest = document.querySelector('#lowest'),
+    highest = document.querySelector('#highest');
+
+let guess = '',
+    randomNumber = getRandomNum(),
+    currentAttempt = 0,
+    winFlag = false,
+    lossFlag = false;
 
 playBtn.addEventListener('click', play);
+initialize();
+
+function initialize() {
+    lowest.textContent = lowestNumber;
+    highest.textContent = highestNumber;
+}
 
 function play() {
     if(winFlag || lossFlag) {
@@ -72,6 +83,11 @@ function resetGame() {
     guessInput.classList = '';
     guessInput.disabled = false;
     guess = '';
-    randomNumber = Math.floor(Math.random() * highestNumber);
+    randomNumber = getRandomNum();
     currentAttempt = 0;
+}
+
+function getRandomNum() {
+    const result = Math.floor(Math.random() * (highestNumber-lowestNumber) + 1) + lowestNumber;
+    return result;
 }
