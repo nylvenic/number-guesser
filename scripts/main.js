@@ -5,7 +5,7 @@ const response = document.querySelector('#response');
 const guessInput = document.querySelector('#guess');
 let guess = '';
 let randomNumber = Math.floor(Math.random() * highestNumber) + 1;
-let currentAttempt = 1;
+let currentAttempt = 0;
 let winFlag = false;
 let lossFlag = false;
 
@@ -20,6 +20,16 @@ function play() {
     const guessInput = document.querySelector('#guess');
     guess = guessInput.value;
     guessInput.value = '';
+
+    if(guess > highestNumber) {
+        changeResponse('That number is too high!');
+        return;
+    }
+
+    if(guess < 1) {
+        changeResponse('That number is too low!');
+        return;
+    }
 
     if(guess == randomNumber) {
         guessInput.className = 'success';
